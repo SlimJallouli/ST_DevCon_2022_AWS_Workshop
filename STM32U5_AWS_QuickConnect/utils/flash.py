@@ -5,13 +5,20 @@ import string
 import sys
 import time
 import serial.tools.list_ports
-
+import getopt
 
 # BIN File name
 BIN_FILE = '..\\..\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
 
 # List of possible board labels
 boards = ["DIS_U585AI"]
+
+HELP = ['flash.py options:', 
+        '\n\t-h or --help for help',
+        '\n\t--bin-file= <bin file path>', 
+        '\n\t--version for the file version']
+
+VERSION = "1.0.0"      
 
 # Flash the board using drag and drop
 def flash_board(flashing_file, USBPATH):
@@ -63,13 +70,30 @@ def find_path(op_sys):
 
 
 
-def main():
-    flash_board(BIN_FILE, find_path(platform.platform()))
+def main(argv):
+    try:
+        opts, args = getopt.getopt(argv,"h", ["help", "bin-file=", "version"])
+    except getopt.GetoptError:
+        print("Parameter Error")
+        sys.exit(1)
+
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            print(*HELP)
+            sys.exit(1)
+        
+        elif opt in ("--version"):
+            print("flash.py version: " + VERSION + " " + str(boards))
+            sys.exit(1)
+
+        elif opt in ("--bin-file"):
+            BIN_FILE = arg 
+            flash_board(BIN_FILE, find_path(platform.platform()))
 
 
 if __name__ == "__main__":
     try:
-        main()
+        main(sys.argv[1:])
     except Exception as e:
         print(e)
         sys.exit(1)
