@@ -70,7 +70,7 @@ def find_path(op_sys):
     elif "linux" in op_sys.lower():
         user = os.getlogin()
         for board in boards:
-            temp_path = '/media/%s/%s' % (user, board)
+            temp_path = '/media/%s/%s/' % (user, board)
             if os.path.exists(temp_path):
                 USBPATH = temp_path
                 break
