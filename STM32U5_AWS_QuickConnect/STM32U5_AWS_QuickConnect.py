@@ -1,3 +1,17 @@
+#******************************************************************************
+# * @file           : STM32U5_AWS_QuickConnect.py
+# * @brief          : Automatically registers new thing to AWS associated with connected STM32.
+# ******************************************************************************
+# * @attention
+# *
+# * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+# * All rights reserved.</center></h2>
+# *
+# * This software component is licensed by ST under BSD 3-Clause license,
+# * the "License"; You may not use this file except in compliance with the
+# * License. You may obtain a copy of the License at:
+# *                        opensource.org/licenses/BSD-3-Clause
+# ******************************************************************************
 from ast import Interactive
 import sys
 import subprocess
@@ -10,8 +24,8 @@ SSID = 'ssid'
 PSWD = 'pswd'
 DUMMY_SSID = '0'
 DUMMY_PSWD = '0'
-BIN_FILE = '..\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
-VERSION="1.0.0"
+BIN_FILE = '..\\firmware\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
+VERSION="1.0.1 ST TT Devcon 2022"
 
 HELP = ['openDashboard.py options:', 
         '\n\t-h or --help for help',
@@ -51,7 +65,7 @@ def getHiddenParam(curParam, label):
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hi", ["help", "interactive", "version", "ssid=", "password=", "key=", "secret-key="])
+        opts, args = getopt.getopt(argv,"h", ["help", "interactive", "version", "ssid=", "password=", "key=", "secret-key="])
     except getopt.GetoptError:
         print("Parameter Error")
         sys.exit(1)
@@ -93,3 +107,5 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+#************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

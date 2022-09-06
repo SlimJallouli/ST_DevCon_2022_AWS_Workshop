@@ -1,3 +1,17 @@
+#******************************************************************************
+# * @file           : setWiFiParams.py
+# * @brief          : Set the Wi-Fi paremeters in to the board
+# ******************************************************************************
+# * @attention
+# *
+# * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+# * All rights reserved.</center></h2>
+# *
+# * This software component is licensed by ST under BSD 3-Clause license,
+# * the "License"; You may not use this file except in compliance with the
+# * License. You may obtain a copy of the License at:
+# *                        opensource.org/licenses/BSD-3-Clause
+# ******************************************************************************
 from mimetypes import common_types
 import serial, serial.tools.list_ports
 import time
@@ -77,3 +91,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
         sys.exit(-1)
+
+#************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/        
