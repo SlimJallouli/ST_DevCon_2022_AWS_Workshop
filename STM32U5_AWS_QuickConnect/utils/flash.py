@@ -50,18 +50,15 @@ def flash_board(flashing_file, USBPATH, COM):
     os.system(cmd)
 
     port = serial.Serial(COM, 115200)
-    time.sleep(1)
+    time.sleep(0.1)
 
     bytesToRead = port.in_waiting
-    print("Waiting for serial")
     while (port.in_waiting <= bytesToRead):
-        print(port.in_waiting)
-        time.sleep(1)
+        time.sleep(0.1)
 
 # Find the board drive
 def find_path(op_sys):
     USBPATH = ''
-    print(op_sys)
     if "windows" in op_sys.lower():
         # Find drive letter
         for l in string.ascii_uppercase:
@@ -119,7 +116,7 @@ def main(argv):
         elif opt in ("--bin-file"):
             BIN_FILE = arg 
             COM = get_com()
-            flash_board(BIN_FILE, find_path(platform.platform()), COM)
+            flash_board(BIN_FILE, find_path(platform.system()), COM)
 
 
 if __name__ == "__main__":
