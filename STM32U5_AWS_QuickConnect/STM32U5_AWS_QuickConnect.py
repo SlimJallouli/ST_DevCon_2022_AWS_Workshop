@@ -20,11 +20,11 @@ from utils.getDeviceName import *
 import getopt
 import getpass
 
-SSID = 'ssid'
-PSWD = 'pswd'
+SSID = 'Ziply-3970'
+PSWD = 'clarycantusethis206'
 DUMMY_SSID = '0'
 DUMMY_PSWD = '0'
-BIN_FILE = '..\\firmware\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
+BIN_FILE = '../firmware/Projects/b_u585i_iot02a_ntz/Debug/b_u585i_iot02a_ntz.bin'
 VERSION="1.0.1 ST TT Devcon 2022"
 
 HELP = ['openDashboard.py options:', 
@@ -100,10 +100,10 @@ def main(argv):
         pswd = getHiddenParam(pswd, "Wi-Fi Password")
 
     
-    cmd(['python', 'utils\\flash.py', '--bin-file='+BIN_FILE])
-    cmd(['python', 'utils\\setWiFiParam.py', '--ssid=' + DUMMY_SSID, '--password='+ DUMMY_PSWD])
-    cmd(['python', 'utils\\provision.py', '--thing-name=' + name, '--wifi-ssid=' +  ssid, '--wifi-credential=' + pswd])
-    cmd(['python', 'utils\\readSerial.py'])
+    cmd(['python3', 'utils/flash.py', '--bin-file='+BIN_FILE])
+    cmd(['python3', './utils/setWiFiParam.py', '--ssid=' + DUMMY_SSID, '--password='+ DUMMY_PSWD])
+    cmd(['python3', './utils/provision.py', '--thing-name=' + name, '--wifi-ssid=' +  ssid, '--wifi-credential=' + pswd])
+    cmd(['python3', './utils/readSerial.py'])
 
 if __name__ == "__main__":
     main(sys.argv[1:])

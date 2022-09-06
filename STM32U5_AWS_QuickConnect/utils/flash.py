@@ -11,21 +11,21 @@
 # * the "License"; You may not use this file except in compliance with the
 # * License. You may obtain a copy of the License at:
 # *                        opensource.org/licenses/BSD-3-Clause
-# ******************************************************************************
+#*********************************************************************
 import serial
+import serial.tools.list_ports
 import os
 import platform
 import string
 import sys
 import time
-import serial.tools.list_ports
 import getopt
 
 # BIN File name
-BIN_FILE = '..\\..\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
+# BIN_FILE = '..\\..\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
 
 # List of possible board labels
-boards = ["DIS_U585AI"]
+boards = ["DIS_U585AI", "NOD_U585AI"]
 
 HELP = ['flash.py options:', 
         '\n\t-h or --help for help',
@@ -35,7 +35,7 @@ HELP = ['flash.py options:',
 VERSION = "1.0.0"      
 
 # Flash the board using drag and drop
-def flash_board(flashing_file, USBPATH):
+def flash_board(flashing_file, USBPATH, COM):
 
     session_os = platform.system()
 
@@ -49,9 +49,19 @@ def flash_board(flashing_file, USBPATH):
 
     os.system(cmd)
 
+    port = serial.Serial(COM, 115200)
+    time.sleep(1)
+
+    bytesToRead = port.in_waiting
+    print("Waiting for serial")
+    while (port.in_waiting <= bytesToRead):
+        print(port.in_waiting)
+        time.sleep(1)
+
 # Find the board drive
 def find_path(op_sys):
     USBPATH = ''
+    print(op_sys)
     if "windows" in op_sys.lower():
         # Find drive letter
         for l in string.ascii_uppercase:
@@ -66,7 +76,7 @@ def find_path(op_sys):
             if os.path.exists(temp_path):
                 USBPATH = temp_path
                 break
-    elif "darwin" in op_sys.lower(): # Mac
+    elif ("darwin" in op_sys.lower()) or ('mac' in op_sys.lower()): # Mac
         for board in boards:
                 temp_path = '/Volumes/%s/' % board
                 if os.path.exists(temp_path):
@@ -82,7 +92,13 @@ def find_path(op_sys):
     
     return USBPATH
 
-
+def get_com():
+    ports = serial.tools.list_ports.comports()
+    for p in ports:
+        if "VID:PID=0483:374" in p.hwid:
+            return p.device
+    
+    return " PORT ERR "
 
 def main(argv):
     try:
@@ -93,7 +109,7 @@ def main(argv):
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
-            print(*HELP)
+            print(HELP)
             sys.exit(1)
         
         elif opt in ("--version"):
@@ -102,7 +118,8 @@ def main(argv):
 
         elif opt in ("--bin-file"):
             BIN_FILE = arg 
-            flash_board(BIN_FILE, find_path(platform.platform()))
+            COM = get_com()
+            flash_board(BIN_FILE, find_path(platform.platform()), COM)
 
 
 if __name__ == "__main__":
