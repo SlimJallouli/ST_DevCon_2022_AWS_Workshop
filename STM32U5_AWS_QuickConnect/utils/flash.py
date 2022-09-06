@@ -32,11 +32,10 @@ HELP = ['flash.py options:',
         '\n\t--bin-file= <bin file path>', 
         '\n\t--version for the file version']
 
-VERSION = "1.0.0"      
+VERSION = "1.1.0"      
 
 # Flash the board using drag and drop
 def flash_board(flashing_file, USBPATH, COM):
-
     session_os = platform.system()
 
     # In Windows
@@ -47,7 +46,9 @@ def flash_board(flashing_file, USBPATH, COM):
 
     print(cmd)
 
-    os.system(cmd)
+    err = os.system(cmd)
+    if err!=0:
+        sys.exit(1)
 
     port = serial.Serial(COM, 115200)
     time.sleep(0.1)

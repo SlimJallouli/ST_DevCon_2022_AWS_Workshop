@@ -21,16 +21,17 @@ import getopt
 import getpass
 import platform
 
-SSID = 'Ziply-3970'
-PSWD = 'clarycantusethis206'
+SSID = "st_iot_demo"
+PSWD = "stm32u585"
 DUMMY_SSID = '0'
 DUMMY_PSWD = '0'
+
 if platform.system() == 'Windows': 
     BIN_FILE = '..\\firmware\\Projects\\b_u585i_iot02a_ntz\\Debug\\b_u585i_iot02a_ntz.bin'
 else:
     BIN_FILE = '../firmware/Projects/b_u585i_iot02a_ntz/Debug/b_u585i_iot02a_ntz.bin'
 
-VERSION="1.0.1 ST TT Devcon 2022"
+VERSION="1.0.2 ST TT Devcon 2022"
 
 HELP = ['openDashboard.py options:', 
         '\n\t-h or --help for help',
