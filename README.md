@@ -1,19 +1,34 @@
-# STM32U5_AWS_QuickConnect for ST 2022 DevCon and TT workshop
+# STM32U5 AWS Workshop for ST DevCon and TechTour 2022
 
-Create IAM user
+## 1- Clone the repo
 
-Install AWS CLI
+```
+git clone https://github.com/SlimJallouli/ST_DevCon_2022_AWS_Workshop.git --recurse-submodules
+```
 
-AWS configure and setup the default profile. The script requires a AWS CLI profile called **default**
+## 2- System check
 
-git clone https://github.com/SlimJallouli/ST_DevCon_2022_AWS_Workshop.git
+Check that you have [**AWS CLI**](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and [**Python**](https://www.python.org/downloads/) installed
 
-cd ST_DevCon_2022_AWS_Workshop
+```
+AWS --version
+python -- version
+```
 
+## 3- System preparation
+
+```
 cd STM32U5_AWS_QuickConnect
+```
 
+```
 pip install -r requirements.txt
+```
 
-Connect your STM32U5 IoT Discovery node to your PC
+### Windows users
 
-python STM32U5_AWS_QuickConnect.py --ssid=MYSSID --password=MYPASSWORD
+- Run ***AWS_CLI_ProfileConfig.bat***
+
+### MAC and Linux users
+
+- Run ***AWS_CLI_ProfileConfig.sh***
