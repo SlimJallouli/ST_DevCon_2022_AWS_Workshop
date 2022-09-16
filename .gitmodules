@@ -1,3 +1,4 @@
 [submodule "STM32U5_AWS_QuickConnect"]
 	path = STM32U5_AWS_QuickConnect
 	url = https://github.com/SlimJallouli/STM32U5_AWS_QuickConnect.git
+	branch = main
